@@ -1,0 +1,80 @@
+@import 'tailwindcss';
+
+/* Class-based dark mode (toggled on <html>) so the theme can be controlled in-app. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+  --color-ink-950: #020617;
+  --color-accent: #0ea5e9;
+  --shadow-panel: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  .dark {
+    color-scheme: dark;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
+    font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    @apply bg-ink-100 text-ink-900 dark:bg-ink-950 dark:text-ink-100;
+  }
+  /* Visible focus rings everywhere (a11y requirement). */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  button {
+    touch-action: manipulation;
+  }
+  canvas {
+    touch-action: none;
+    display: block;
+  }
+  input[type='range'] {
+    accent-color: var(--color-accent);
+  }
+}
+
+@layer utilities {
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Pointer cursors per tool */
+.cursor-tool-pen { cursor: crosshair; }
+.cursor-tool-eraser { cursor: cell; }
+.cursor-tool-lasso { cursor: crosshair; }
+.cursor-tool-pan { cursor: grab; }
+.cursor-tool-text { cursor: text; }
